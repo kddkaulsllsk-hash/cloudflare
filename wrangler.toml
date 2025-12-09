@@ -3,12 +3,14 @@ main = "index.js"
 compatibility_date = "2025-11-09"
 workers_dev = true
 preview_urls = true
-# logpush job is setup to capture from envs ending: log, pro, or one
 logpush = false
-# use node_compat or custom build
-# node_compat = true
 send_metrics = false
 minify = false
+
+[dev]
+port = 5000
+ip = "0.0.0.0"
+local_protocol = "http"
 
 [vars]
 UUID = "d342d11e-d424-4583-b36e-524ab1f0afa4"

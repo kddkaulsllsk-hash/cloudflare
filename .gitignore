@@ -4,3 +4,5 @@
 *.lock
 *.log
 dist
+.wrangler/
+.dev.vars

@@ -1,0 +1,46 @@
+modules = ["nodejs-20"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Cloudflare Worker Dev"
+
+[[workflows.workflow]]
+name = "Cloudflare Worker Dev"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx wrangler dev --port 5000 --ip 0.0.0.0"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 34275
+externalPort = 3001
+
+[[ports]]
+localPort = 37285
+externalPort = 3000
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["npx", "wrangler", "dev", "--port", "5000", "--ip", "0.0.0.0"]
